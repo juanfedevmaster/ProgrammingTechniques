@@ -99,7 +99,6 @@ public class DoubleLinkedList {
         } else {
             System.out.println("The index should be lower than the list size.");
         }
-
     }
 
     public void printList() {

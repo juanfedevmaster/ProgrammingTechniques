@@ -22,7 +22,7 @@ public class Main {
         list.insertEnd(new Node(50));
         list.insertEnd(new Node(60));
         
-        list.insertByIndex(new Node(100), 5);
+        list.insertByIndex(new Node(100), 7);
         
         list.printList();
     }
