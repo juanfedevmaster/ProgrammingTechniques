@@ -22,8 +22,10 @@ public class Main {
         list.insertEnd(new Node(50));
         list.insertEnd(new Node(60));
         
-        list.insertByIndex(new Node(100), 7);
-        
+        //list.insertByIndex(new Node(100), 7);
+        //list.removeFirstElement();
+        //list.removeElement(10);
+        //list.removeElementByIndex(0);
         list.printList();
     }
 }

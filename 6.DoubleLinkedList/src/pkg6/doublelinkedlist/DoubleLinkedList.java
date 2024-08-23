@@ -101,6 +101,39 @@ public class DoubleLinkedList {
         }
     }
 
+    public void removeFirstElement() {
+        if (isListEmpty()) {
+            return;
+        } else if (this.head.getNext() == null) {
+            removeOnlyHead();
+            return;
+        }
+
+        Node beforeNode = this.head;
+
+        this.head = this.head.getNext();
+        this.head.setBefore(null);
+
+        beforeNode.setNext(null);
+
+    }
+
+    public void removeLastElement() {
+        if (isListEmpty()) {
+            return;
+        } else if (this.head.getNext() == null) {
+            removeOnlyHead();
+            return;
+        }
+
+        Node oldEnd = this.end;
+
+        this.end = this.end.getBefore();
+        this.end.setNext(null);
+
+        oldEnd.setBefore(null);
+    }
+
     public void printList() {
         if (this.head == null) {
             System.out.println("The list is empty.");
@@ -113,5 +146,82 @@ public class DoubleLinkedList {
                 index++;
             }
         }
+    }
+
+    public void removeElement(int value) {
+        if (isListEmpty()) {
+            return;
+        } else if (this.head.getValue() == value && this.head.getNext() == null) {
+            removeOnlyHead();
+            return;
+        }
+
+        Node actualNode = this.head;
+        while (actualNode != null && actualNode.getValue() != value) {
+            actualNode = actualNode.getNext();
+        }
+
+        if(actualNode == null){
+            System.out.println("The value not exit in the list.");
+        } else if (actualNode == this.head) {
+            removeFirstElement();
+        } else if (actualNode == this.end) {
+            removeLastElement();
+        } 
+        else {
+            Node nextNode = actualNode.getNext();
+            Node beforeNode = actualNode.getBefore();
+            
+            nextNode.setBefore(beforeNode);
+            beforeNode.setNext(nextNode);
+        }
+    }
+    
+    public void removeElementByIndex(int index) {
+        if (isListEmpty()) {
+            return;
+        } else if (index == 0 && this.head.getNext() == null) {
+            removeOnlyHead();
+            return;
+        }
+
+        Node actualNode = this.head;
+        int actualIndex = 0;
+        while (actualNode != null && actualIndex != index) {
+            actualNode = actualNode.getNext();
+            actualIndex ++;
+        }
+
+        if(actualNode == null){
+            System.out.println("index out bounds.");
+        } else if (actualNode == this.head) {
+            removeFirstElement();
+        } else if (actualNode == this.end) {
+            removeLastElement();
+        } 
+        else {
+            Node nextNode = actualNode.getNext();
+            Node beforeNode = actualNode.getBefore();
+            
+            nextNode.setBefore(beforeNode);
+            beforeNode.setNext(nextNode);
+        }
+    }
+    
+    
+
+    private boolean isListEmpty() {
+        if (this.head == null) {
+            System.out.println("The list is empty.");
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean removeOnlyHead() {
+        this.head = null;
+        this.end = null;
+        return true;
     }
 }
