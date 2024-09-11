@@ -18,6 +18,21 @@ public class Person {
     private float height;
     private boolean gender;
     
+    public Person(){
+    
+    }
+    
+    public Person(String id, String name, String lastName, String career, String university, int age, float height, boolean gender) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.career = career;
+        this.university = university;
+        this.age = age;
+        this.height = height;
+        this.gender = gender;
+    }
+    
     
     
     public String getId() {
