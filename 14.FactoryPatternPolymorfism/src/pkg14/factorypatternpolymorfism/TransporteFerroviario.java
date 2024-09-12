@@ -8,15 +8,11 @@ package pkg14.factorypatternpolymorfism;
  *
  * @author jufeq
  */
-public class TransporteMaritimo extends Transporte implements IManifiesto{
-    
-    @Override
-    public void enviarTransporte() {
-        System.out.println("Envio de la carga: " + getCargaTransporte().getTipoCarga()+ " Via Barco");
-    }
+public class TransporteFerroviario extends Transporte {
 
     @Override
-    public void permisoArribo() {
-        System.out.println("Entregar permiso");
+    public void enviarTransporte() {
+        System.out.println("Envio de la carga: " + getCargaTransporte().getTipoCarga() + " Via Tren");
     }
+
 }

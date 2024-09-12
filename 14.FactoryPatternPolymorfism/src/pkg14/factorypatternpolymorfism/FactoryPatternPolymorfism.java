@@ -18,9 +18,8 @@ public class FactoryPatternPolymorfism {
      */
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        ArrayList<Transporte> transporteMateriales = new ArrayList<>();
 
-        ArrayList<TransporteMaritimo> transportesMaritimos = new ArrayList<>();
-        ArrayList<TransporteTerrestre> transportesTerrestres = new ArrayList<>();
         int opcion = 0;
         do {
             System.out.println("******************************");
@@ -29,31 +28,59 @@ public class FactoryPatternPolymorfism {
             System.out.println("1. Carbon");
             System.out.println("2. Gasolina");
             System.out.println("3. Madera");
+            System.out.println("4. Arena");
             System.out.println("Ingrese la opción: ");
 
+            Transporte transporte;
+            Carga carga = new Carga();
             opcion = scan.nextInt();
 
             switch (opcion) {
                 case 1:
-                    TransporteMaritimo transporte1 = new TransporteMaritimo();
+                    transporte = new TransporteMaritimo();
                     System.out.println("Ingrese la cantidad de la carga: ");
-                    transporte1.setCantidadCarga(scan.nextInt());
-                    transporte1.setTipoCarga("Carbon");
-                    transportesMaritimos.add(transporte1);
+
+                    carga.setCantidadCarga(scan.nextInt());
+                    carga.setTipoCarga("Carbon");
+                    carga.setUnidadMedida("Ton");
+
+                    transporte.setCargaTransporte(carga);
+                    transporteMateriales.add(transporte);
                     break;
                 case 2:
-                    TransporteTerrestre transporte2 = new TransporteTerrestre();
+                    transporte = new TransporteTerrestre();
+                    
                     System.out.println("Ingrese la cantidad de la carga: ");
-                    transporte2.setCantidadCarga(scan.nextInt());
-                    transporte2.setTipoCarga("Gasolina");
-                    transportesTerrestres.add(transporte2);
+                    carga.setCantidadCarga(scan.nextInt());
+                    carga.setTipoCarga("Gasolina");
+                    carga.setUnidadMedida("Litros");
+                    
+                    transporte.setCargaTransporte(carga);
+                    transporteMateriales.add(transporte);
                     break;
                 case 3:
-                    TransporteTerrestre transporte3 = new TransporteTerrestre();
+                    transporte = new TransporteTerrestre();
                     System.out.println("Ingrese la cantidad de la carga: ");
-                    transporte3.setCantidadCarga(scan.nextInt());
-                    transporte3.setTipoCarga("Madera");
-                    transportesTerrestres.add(transporte3);
+
+                    carga.setCantidadCarga(scan.nextInt());
+                    carga.setTipoCarga("Madera");
+                    carga.setUnidadMedida("Ton");
+                    
+                    transporte.setCargaTransporte(carga);
+                    transporteMateriales.add(transporte);
+                    break;
+                    
+                case 4:
+                    transporte = new TransporteFerroviario();
+                    System.out.println("Ingrese la cantidad de la carga: ");
+                    
+                    carga.setCantidadCarga(scan.nextInt());
+                    carga.setTipoCarga("Arena");
+                    carga.setUnidadMedida("Ton");
+                    
+                    transporte.setCargaTransporte(carga);
+                            
+                    transporteMateriales.add(transporte);
                     break;
                 default:
                     opcion = 0;
@@ -61,11 +88,7 @@ public class FactoryPatternPolymorfism {
             }
         } while (opcion != 0);
 
-        for (TransporteTerrestre trans : transportesTerrestres) {
-            trans.enviarTransporte();
-        }
-        
-        for (TransporteMaritimo trans : transportesMaritimos) {
+        for (Transporte trans : transporteMateriales) {
             trans.enviarTransporte();
         }
     }

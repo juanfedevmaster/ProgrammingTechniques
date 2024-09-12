@@ -8,28 +8,10 @@ package pkg14.factorypatternpolymorfism;
  *
  * @author jufeq
  */
-public class TransporteTerrestre {
-
-    private int cantidadCarga;
-    private String tipoCarga;
-
-    public int getCantidadCarga() {
-        return cantidadCarga;
-    }
-
-    public void setCantidadCarga(int cantidadCarga) {
-        this.cantidadCarga = cantidadCarga;
-    }
-
-    public String getTipoCarga() {
-        return tipoCarga;
-    }
-
-    public void setTipoCarga(String tipoCarga) {
-        this.tipoCarga = tipoCarga;
-    }
+public class TransporteTerrestre extends Transporte{
     
+    @Override
     public void enviarTransporte() {
-        System.out.println("Envio de la carga: " + tipoCarga);
+        System.out.println("Envio de la carga: " + getCargaTransporte().getTipoCarga() + " Via Camion");
     }
 }
