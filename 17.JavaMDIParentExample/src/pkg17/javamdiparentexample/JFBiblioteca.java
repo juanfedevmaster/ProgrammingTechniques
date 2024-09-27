@@ -3,13 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/MDIApplication.java to edit this template
  */
 package pkg17.javamdiparentexample;
+
+import java.util.Vector;
+import pkg17.javamdiparentexample.logic.Pais;
+
 /**
  *
  * @author jufeq
  */
 public class JFBiblioteca extends javax.swing.JFrame {
     
-    private JFUsuario jfUsuario = new JFUsuario();
+    private JFUsuario jfUsuario = null;
     
     /**
      * Creates new form Biblioteca
@@ -109,6 +113,8 @@ public class JFBiblioteca extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(this.jfUsuario == null || this.jfUsuario.isClosed()){
             this.jfUsuario = new JFUsuario();
+            
+            this.jfUsuario.setPaisesForm(getPaises());
         }
         
         this.desktopPane.add(this.jfUsuario);
@@ -163,5 +169,62 @@ public class JFBiblioteca extends javax.swing.JFrame {
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
-
+    
+    //Private methods
+    
+    private Vector<Pais> getPaises(){
+        Vector<Pais> paises = new Vector<>();
+        paises.add(new Pais(1, "Argentina"));
+        paises.add(new Pais(2, "Australia"));
+        paises.add(new Pais(3, "Austria"));
+        paises.add(new Pais(4, "Bélgica"));
+        paises.add(new Pais(5, "Brasil"));
+        paises.add(new Pais(6, "Canadá"));
+        paises.add(new Pais(7, "Chile"));
+        paises.add(new Pais(8, "China"));
+        paises.add(new Pais(9, "Colombia"));
+        paises.add(new Pais(10, "Corea del Sur"));
+        paises.add(new Pais(11, "Dinamarca"));
+        paises.add(new Pais(12, "Ecuador"));
+        paises.add(new Pais(13, "Egipto"));
+        paises.add(new Pais(14, "España"));
+        paises.add(new Pais(15, "Estados Unidos"));
+        paises.add(new Pais(16, "Filipinas"));
+        paises.add(new Pais(17, "Finlandia"));
+        paises.add(new Pais(18, "Francia"));
+        paises.add(new Pais(19, "Grecia"));
+        paises.add(new Pais(20, "Guatemala"));
+        paises.add(new Pais(21, "India"));
+        paises.add(new Pais(22, "Indonesia"));
+        paises.add(new Pais(23, "Irlanda"));
+        paises.add(new Pais(24, "Italia"));
+        paises.add(new Pais(25, "Japón"));
+        paises.add(new Pais(26, "México"));
+        paises.add(new Pais(27, "Noruega"));
+        paises.add(new Pais(28, "Nueva Zelanda"));
+        paises.add(new Pais(29, "Países Bajos"));
+        paises.add(new Pais(30, "Panamá"));
+        paises.add(new Pais(31, "Paraguay"));
+        paises.add(new Pais(32, "Perú"));
+        paises.add(new Pais(33, "Polonia"));
+        paises.add(new Pais(34, "Portugal"));
+        paises.add(new Pais(35, "Reino Unido"));
+        paises.add(new Pais(36, "República Checa"));
+        paises.add(new Pais(37, "Rusia"));
+        paises.add(new Pais(38, "Singapur"));
+        paises.add(new Pais(39, "Sudáfrica"));
+        paises.add(new Pais(40, "Suecia"));
+        paises.add(new Pais(41, "Suiza"));
+        paises.add(new Pais(42, "Tailandia"));
+        paises.add(new Pais(43, "Turquía"));
+        paises.add(new Pais(44, "Ucrania"));
+        paises.add(new Pais(45, "Uruguay"));
+        paises.add(new Pais(46, "Venezuela"));
+        paises.add(new Pais(47, "Vietnam"));
+        paises.add(new Pais(48, "Argelia"));
+        paises.add(new Pais(49, "Bangladés"));
+        paises.add(new Pais(50, "Arabia Saudita"));
+        
+        return paises;
+    }
 }
