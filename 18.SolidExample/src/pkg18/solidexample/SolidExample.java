@@ -4,6 +4,13 @@
  */
 package pkg18.solidexample;
 
+import pkg18.solidexample.DependencyInversion.EmailService;
+import pkg18.solidexample.DependencyInversion.IMessageService;
+import pkg18.solidexample.DependencyInversion.NotificationService;
+import pkg18.solidexample.DependencyInversion.SMSService;
+import pkg18.solidexample.InterfaceSegregation.MultifuntionalDevice;
+import pkg18.solidexample.InterfaceSegregation.Printer;
+import pkg18.solidexample.InterfaceSegregation.Scanner;
 import pkg18.solidexample.LiskovSustitution.CuadradoLiskov;
 import pkg18.solidexample.LiskovSustitution.IFigura;
 import pkg18.solidexample.LiskovSustitution.Rectangulo;
@@ -50,6 +57,32 @@ public class SolidExample {
 
         IFigura cuadrado = new CuadradoLiskov(5);
         System.out.println("Área del Cuadrado: " + cuadrado.getArea());
+
+        System.out.println("===========================================================");
+        System.out.println("Interface Segregation");
+
+        Printer printer = new Printer();
+        printer.print("Documento de ejemplo");
+
+        Scanner scanner = new Scanner();
+        scanner.scan("Documento de ejemplo");
+
+        MultifuntionalDevice mfp = new MultifuntionalDevice();
+        mfp.print("Documento multifuncional");
+        mfp.scan("Documento multifuncional");
+        
+        System.out.println("===========================================================");
+        System.out.println("Dependency Inversion");
+        
+        IMessageService emailService = new EmailService();
+        IMessageService smsService = new SMSService();
+        
+        
+        NotificationService notificationServiceEmail = new NotificationService(emailService);
+        notificationServiceEmail.notify("Mensaje importante por Email");
+
+        NotificationService notificationServiceSMS = new NotificationService(smsService);
+        notificationServiceSMS.notify("Mensaje importante por SMS");
 
     }
 
