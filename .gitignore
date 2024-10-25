@@ -80,3 +80,4 @@ replay_pid*
 /19.LambdaAndFuntions/build/
 /19.LambdaAndFuntions/dist/
 /23.MongoDBExample/target/
+/24.MongoDBLoadTest/target/
