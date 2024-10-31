@@ -127,6 +127,7 @@ public class Login extends javax.swing.JInternalFrame {
         if (userExist) {
             this.mainParent.getFileMenu().setEnabled(true);
             this.mainParent.getHelpMenu().setEnabled(true);
+            this.mainParent.getRegistros().add(txtUser.getText());
 
             this.setVisible(false);
         } else {

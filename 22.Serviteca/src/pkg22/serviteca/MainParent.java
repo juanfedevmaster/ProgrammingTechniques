@@ -5,6 +5,7 @@
 package pkg22.serviteca;
 
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.JDesktopPane;
 import javax.swing.JMenu;
 
@@ -16,6 +17,12 @@ public class MainParent extends javax.swing.JFrame {
 
     private Login loginFrame;
     private NewLogin newLogin;
+
+    public ArrayList<String> getRegistros() {
+        return registros;
+    }
+    
+    private ArrayList<String> registros;
 
     public NewLogin getNewLogin() {
         return newLogin;
@@ -48,6 +55,7 @@ public class MainParent extends javax.swing.JFrame {
         
         loginFrame.setVisible(true);
         loginFrame.setMainParent(this);
+        registros = new ArrayList<String>();
     }
 
     private void setCenterLocationInternalFrame(Component component) {
