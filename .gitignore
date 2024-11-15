@@ -83,3 +83,5 @@ replay_pid*
 /24.MongoDBLoadTest/target/
 /25.FormsServlets/target/
 /25.FormsAndServlets/target/
+/26.InteractionWithServlet/target/
+/27.InteractionWithServletV2/target/
