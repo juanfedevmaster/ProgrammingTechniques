@@ -4,6 +4,8 @@
  */
 package Entities;
 
+import org.bson.Document;
+
 /**
  *
  * @author jufeq
@@ -14,6 +16,9 @@ public class Product {
     private double price;
 
     public Product() {
+        this.id = 0;
+        this.name = "";
+        this.price = 0.0;
     }
 
     public Product(int id, String name, double price) {
@@ -44,5 +49,20 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+    
+    public Document toDocument() {
+        return new Document("id", id)
+                .append("name", name)
+                .append("price", price);
+    }
+    
+    // Static Methods
+    public static Product fromDocument(Document doc){
+        return new Product(
+                doc.getInteger("id"),
+                doc.getString("name"),
+                doc.getDouble("price")
+        );
     }
 }

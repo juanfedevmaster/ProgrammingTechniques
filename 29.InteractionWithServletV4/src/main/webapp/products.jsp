@@ -18,6 +18,7 @@
                 </div>
                 <div class="col-8">
                     <h1>Lista de Productos</h1>
+                    <a class="btn btn-primary" role="button" aria-disabled="true" href="SvProducts?Id=0">Crear</a>
                     <table id="tableProducts" class="display" style="width:100%">
                         <thead>
                             <tr>
@@ -41,6 +42,7 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-primary" role="button" aria-disabled="true" href="SvProducts?Id=<%=p.getId()%>">Modificar</a>
+                                    <a class="btn btn-danger" role="button" aria-disabled="true" href="SvProducts?Id=<%=p.getId()%>&action=delete">Eliminar</a>
                                 </td>
                             </tr>
                             <%}%>

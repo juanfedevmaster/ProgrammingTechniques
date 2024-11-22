@@ -5,6 +5,7 @@
 package com.mycompany.interactionwithservletv4;
 
 import Entities.Product;
+import JSONPersistance.ProductRepository;
 import JSONPersistance.ProductService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
@@ -14,6 +15,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -34,28 +36,48 @@ public class SvProducts extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ServletContext context = request.getServletContext();
-        String filePath = context.getRealPath("/WEB-INF/classes/META-INF/products.json");
 
+        ProductRepository productRepo = new ProductRepository();
         RequestDispatcher dispatcher;
 
         String id = request.getParameter("Id");
+        String action = request.getParameter("action");
 
-        ProductService productService = new ProductService(filePath);
-        List<Product> products = productService.getProducts();
+        if (action == null) {
 
-        if (id != null && !id.isEmpty()) {
-            int idProduct = Integer.parseInt(id);
-            Product product = products.stream().filter(x -> x.getId() == idProduct).findFirst().get();
+            if (id != null && !id.isEmpty() && id.equals("0")) {
+                Product product = new Product();
 
-            request.setAttribute("product", product);
-            dispatcher = request.getRequestDispatcher("productDetails.jsp");
-            dispatcher.forward(request, response);
-        } else {
-            request.setAttribute("products", products);
+                request.setAttribute("product", product);
+                dispatcher = request.getRequestDispatcher("productDetails.jsp");
+                dispatcher.forward(request, response);
+            } else if (id != null && !id.isEmpty() && !id.equals("0")) {
+                int idProduct = Integer.parseInt(id);
+                Product product = productRepo.getProduct(idProduct);
 
-            dispatcher = request.getRequestDispatcher("products.jsp");
-            dispatcher.forward(request, response);
+                request.setAttribute("product", product);
+                dispatcher = request.getRequestDispatcher("productDetails.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                List<Product> products = productRepo.getProducts();
+                request.setAttribute("products", products);
+
+                dispatcher = request.getRequestDispatcher("products.jsp");
+                dispatcher.forward(request, response);
+            }
+        } 
+        
+        if(action != null && action.equals("delete")){
+            if (id != null && !id.isEmpty()) {
+                int idProduct = Integer.parseInt(id);
+                productRepo.deleteProduct(idProduct);
+
+                List<Product> products = productRepo.getProducts();
+                request.setAttribute("products", products);
+
+                dispatcher = request.getRequestDispatcher("products.jsp");
+                dispatcher.forward(request, response);
+            }
         }
     }
 
@@ -70,32 +92,39 @@ public class SvProducts extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ServletContext context = request.getServletContext();
-        String filePath = context.getRealPath("/WEB-INF/classes/META-INF/products.json");
-        
-        ProductService productService = new ProductService(filePath);
-        List<Product> products = productService.getProducts();
+
+        ProductRepository productRepo = new ProductRepository();
 
         String id = request.getParameter("id");
         String name = request.getParameter("name");
         String price = request.getParameter("price");
 
-        if (id != null && !id.isEmpty()) {
+        if (id != null && !id.isEmpty() && id.equals("0")) {
             int idProduct = Integer.parseInt(id);
-            Product product = products.stream().filter(x -> x.getId() == idProduct).findFirst().get();
-            
-            double priceConvert = Double.parseDouble(price);
-            product.setName(name);
-            product.setPrice(priceConvert);
-            
-            productService.saveJson(products);
+            double priceProduct = Double.parseDouble(price);
+
+            List<Product> products = productRepo.getProducts();
+            int maxId = products.stream().max(Comparator.comparing(Product::getId)).get().getId() + 1;
+
+            Product product = new Product(maxId, name, priceProduct);
+            productRepo.addProduct(product);
+
+            products.add(product);
+
+            request.setAttribute("products", products);
+
+        } else if (id != null && !id.isEmpty() && !id.equals("0")) {
+            int idProduct = Integer.parseInt(id);
+            double priceProduct = Double.parseDouble(price);
+            productRepo.updateProduct(idProduct, name, priceProduct);
+
+            List<Product> products = productRepo.getProducts();
             request.setAttribute("products", products);
         }
-        
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("products.jsp");
         dispatcher = request.getRequestDispatcher("products.jsp");
         dispatcher.forward(request, response);
-
     }
 
     /**
