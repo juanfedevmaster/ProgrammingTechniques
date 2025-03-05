@@ -30,7 +30,8 @@ jobs:
         uses: github/codeql-action/analyze@v3
 
       - name: Upload SARIF as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # ✅ Usa la versión más reciente
         with:
           name: codeql-results
           path: results.sarif
+
